@@ -1,0 +1,20 @@
+import java.util.HashMap;
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        HashMap<Character, Integer> seen = new HashMap<>();
+        int l = 0;
+        int length = 0;
+        for (int r = 0; r < s.length(); r++) {
+            char ch = s.charAt(r);
+            if (seen.containsKey(ch) && seen.get(ch) >= l) {
+                l = seen.get(ch) + 1;
+            } else {
+                length = Math.max(length, r - l + 1);
+            }
+            seen.put(ch, r);
+        }
+        return length;
+    }
+}
+// returns the maximum length of the substring without repetition 
+// Two pointer technique
